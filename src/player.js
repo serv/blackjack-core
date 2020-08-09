@@ -4,6 +4,7 @@ import Hand from "./hand";
 export default class Player extends Participant {
   constructor() {
     super({ type: "player" });
+    this.balance = 200;
   }
 
   split() {
