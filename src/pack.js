@@ -49,4 +49,8 @@ export default class Pack {
       }
     }
   }
+
+  pop() {
+    return this.cards.pop();
+  }
 }
