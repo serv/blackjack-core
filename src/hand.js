@@ -16,6 +16,10 @@ export default class Hand {
     this.cards.push(card);
   }
 
+  pop() {
+    return this.cards.pop();
+  }
+
   split() {
     if (
       !(
@@ -33,5 +37,9 @@ export default class Hand {
     splitted.take(popped);
 
     return splitted;
+  }
+
+  isPair() {
+    return this.cards.length === 2 && this.cards[0].name === this.cards[1].name;
   }
 }

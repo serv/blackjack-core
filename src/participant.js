@@ -16,4 +16,8 @@ export default class Participant {
   take(card) {
     this.hands[this.activeHand].take(card);
   }
+
+  currentHand() {
+    return this.hands[this.activeHand];
+  }
 }
