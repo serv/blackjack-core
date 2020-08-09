@@ -1,0 +1,9 @@
+export default class Bet {
+  constructor(amount) {
+    this.amount = amount;
+  }
+
+  setupNatural() {
+    this.amount *= 1.5;
+  }
+}
