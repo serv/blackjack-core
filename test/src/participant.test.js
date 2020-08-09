@@ -17,6 +17,10 @@ describe("Participant", () => {
     participant.take(popped);
   });
 
+  it("has an activeHand", () => {
+    expect(participant.activeHand).to.eql(0);
+  });
+
   describe("take a card, when you have two hands after you split", () => {
     const participant2 = new Participant({ type: "player" });
     const hand = new Hand({ type: "player" });
@@ -24,12 +28,8 @@ describe("Participant", () => {
 
     participant2.hands.push(hand);
 
-    it("fail case without specifying the hand", () => {
-      expect(() => participant2.take(popped)).to.throw("failed to take a card");
-    });
-
-    it("successfully take a card specifying the hand", () => {
-      participant2.take(popped, 0);
+    it("successfully take a card", () => {
+      participant2.take(popped);
 
       expect(participant2.hands[0].cards[0]).to.eql(popped);
     });

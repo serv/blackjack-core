@@ -4,6 +4,7 @@ export default class Participant {
   constructor({ type }) {
     this.type = type;
     this.hands = [];
+    this.activeHand = 0;
     this.setupHand();
   }
 
@@ -12,15 +13,7 @@ export default class Participant {
     this.hands.push(hand);
   }
 
-  take(card, index) {
-    if (index === null || index === undefined) {
-      if (this.hands.length !== 1) {
-        throw new Error("failed to take a card");
-      }
-
-      index = 0;
-    }
-
-    this.hands[index].take(card);
+  take(card) {
+    this.hands[this.activeHand].take(card);
   }
 }
