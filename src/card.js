@@ -20,4 +20,8 @@ export default class Card {
         this.values = [parseInt(this.name)];
     }
   }
+
+  simpleValue() {
+    return this.values[0];
+  }
 }

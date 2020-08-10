@@ -11,6 +11,10 @@ export default class Bet {
     this.amount *= 2;
   }
 
+  setBet(amount) {
+    this.amount = amount;
+  }
+
   reset() {
     this.amount = 0;
   }

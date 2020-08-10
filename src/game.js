@@ -2,6 +2,7 @@ import Dealer from "./dealer";
 import Player from "./player";
 import Pack from "./pack";
 import Bet from "./bet";
+import RoundManager from "./round-manager";
 
 export default class Game {
   constructor() {
@@ -10,6 +11,7 @@ export default class Game {
     this.bet = new Bet(0);
     this.pack = new Pack();
     this.pack.shuffle();
+    this.roundManager = new RoundManager(this);
   }
 
   addPlayer() {

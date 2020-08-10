@@ -42,4 +42,20 @@ export default class Hand {
   isPair() {
     return this.cards.length === 2 && this.cards[0].name === this.cards[1].name;
   }
+
+  simpleValue() {
+    let sum;
+
+    for (let card of this.cards) {
+      sum += card.simpleValue();
+    }
+
+    return sum;
+  }
+
+  canDoubleDown() {
+    return (
+      this.cards.length === 2 && [9, 10, 11].indexOf(this.simpleValue()) >= 0
+    );
+  }
 }

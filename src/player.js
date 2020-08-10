@@ -18,4 +18,12 @@ export default class Player extends Participant {
 
     this.hands.push(hand);
   }
+
+  switchCurrentHand() {
+    if (this.activeHand + 1 >= this.hands.length) {
+      throw new Error("cannot switch current hand");
+    }
+
+    this.activeHand += 1;
+  }
 }
