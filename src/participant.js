@@ -20,4 +20,9 @@ export default class Participant {
   currentHand() {
     return this.hands[this.activeHand];
   }
+
+  resetHand() {
+    this.hands = [];
+    this.setupHand();
+  }
 }
