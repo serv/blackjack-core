@@ -13,4 +13,19 @@ export default class Game {
   addPlayer() {
     this.players.push(new Player());
   }
+
+  deal() {
+    this.dealCard(this.dealer);
+    this.dealCard(this.dealer);
+    for (let player of this.players) {
+      this.dealCard(player);
+      this.dealCard(player);
+    }
+  }
+
+  dealCard(participant) {
+    const popped = this.pack.pop();
+
+    participant.take(popped);
+  }
 }
