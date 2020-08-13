@@ -15,6 +15,12 @@ export default class RoundManager {
     this.parent.bet.setBet(amount);
   }
 
+  clearBet() {
+    const currentBet = this.getBet();
+    this.parent.players[0].returnBet(currentBet);
+    this.parent.bet.reset();
+  }
+
   start() {
     this.parent.resetRound();
 

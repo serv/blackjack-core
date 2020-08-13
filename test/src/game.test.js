@@ -78,11 +78,18 @@ describe("Game", () => {
 
       describe("bets", () => {
         // Only when bet is in the allowable action, you can bet
-        it("add a bet, normal, allowableActions", () => {});
+        it("add a bet, normal, allowableActions", () => {
+          game.roundManager.setBet(100);
+        });
 
-        it("getBet", () => {});
+        it("getBet", () => {
+          expect(game.roundManager.getBet()).to.eql(100);
+        });
 
-        it("clearBet", () => {});
+        it("clearBet", () => {
+          game.roundManager.clearBet();
+          expect(game.roundManager.getBet()).to.eql(0);
+        });
       });
 
       describe("deal", () => {});

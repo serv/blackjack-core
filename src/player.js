@@ -26,4 +26,12 @@ export default class Player extends Participant {
 
     this.activeHand += 1;
   }
+
+  makeBet(amount) {
+    this.balance -= amount;
+  }
+
+  returnBet(amount) {
+    this.balance += amount;
+  }
 }
