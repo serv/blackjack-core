@@ -92,7 +92,41 @@ describe("Game", () => {
         });
       });
 
-      describe("deal", () => {});
+      describe("deal", () => {
+        const gameForDeal = new Game();
+        gameForDeal.addPlayer({ name: "New Player" });
+
+        it("can be dealt only with a bet", () => {
+          expect(() => {
+            gameForDeal.roundManager.deal();
+          }).to.throw("need to bet first");
+        });
+
+        it("with a bet, can deal", () => {
+          gameForDeal.roundManager.setBet(100);
+          gameForDeal.roundManager.deal();
+        });
+
+        it("a dealer has two cards", () => {
+          expect(gameForDeal.dealer.currentHand().cards.length).to.eql(2);
+        });
+
+        it("a player has two cards", () => {
+          expect(gameForDeal.players[0].currentHand().cards.length).to.eql(2);
+        });
+
+        it("acceptable actions always: hit, stand", () => {
+          const shoultNotHave = ["bet", "clear-bet", "deal"];
+          const shouldHave = ["hit", "stand"];
+
+          expect(gameForDeal.roundManager.allowableActions).to.not.have.members(
+            shoultNotHave
+          );
+          expect(gameForDeal.roundManager.allowableActions).to.have.members(
+            shouldHave
+          );
+        });
+      });
 
       describe("hit", () => {});
 

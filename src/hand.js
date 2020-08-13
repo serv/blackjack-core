@@ -43,6 +43,10 @@ export default class Hand {
     return this.cards.length === 2 && this.cards[0].name === this.cards[1].name;
   }
 
+  isBust() {
+    return this.simpleValue() > 21;
+  }
+
   simpleValue() {
     let sum;
 

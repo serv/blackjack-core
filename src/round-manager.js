@@ -27,6 +27,17 @@ export default class RoundManager {
     return this.evalAlloableActions();
   }
 
+  deal() {
+    if (this.parent.bet.amount === 0) {
+      throw new Error("need to bet first");
+    }
+
+    this.parent.deal();
+
+    this.resetAllowableActions();
+    this.evalAlloableActions();
+  }
+
   resetAllowableActions() {
     this.allowableActions = [];
   }
@@ -48,11 +59,11 @@ export default class RoundManager {
       currentPlayer.hands.length === 1 &&
       currentPlayer.currentHand().cards.length === 2
     ) {
-      if (currentPlayer.currentHand.isPair()) {
+      if (currentPlayer.currentHand().isPair()) {
         this.allowableActions.push("split");
       }
 
-      if (currentPlayer.currentHand.canDoubleDown()) {
+      if (currentPlayer.currentHand().canDoubleDown()) {
         this.allowableActions.push("double-down");
       }
     }
