@@ -38,6 +38,18 @@ export default class RoundManager {
     this.evalAlloableActions();
   }
 
+  hit() {
+    if (this.allowableActions.indexOf("hit") < 0) {
+      throw new Error("need to deal first");
+    }
+
+    if (this.currentActor === "player") {
+      this.parent.dealCard(this.parent.players[0]);
+    } else {
+      this.parent.dealCard(this.parent.dealer);
+    }
+  }
+
   resetAllowableActions() {
     this.allowableActions = [];
   }

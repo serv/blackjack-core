@@ -128,7 +128,25 @@ describe("Game", () => {
         });
       });
 
-      describe("hit", () => {});
+      describe("hit", () => {
+        const gameForHit = new Game();
+        gameForHit.addPlayer({ name: "New Player" });
+
+        it("can be hit only after being dealt", () => {
+          expect(() => {
+            gameForHit.roundManager.hit();
+          }).to.throw("need to deal first");
+        });
+
+        it("can be hit", () => {
+          gameForHit.roundManager.setBet(100);
+          gameForHit.roundManager.deal();
+
+          gameForHit.roundManager.hit();
+
+          expect(gameForHit.players[0].currentHand().cards.length).to.eql(3);
+        });
+      });
 
       describe("stand", () => {});
 
