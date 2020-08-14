@@ -148,7 +148,29 @@ describe("Game", () => {
         });
       });
 
-      describe("stand", () => {});
+      describe("stand", () => {
+        const gameForStand = new Game();
+        gameForStand.addPlayer({ name: "New Player" });
+
+        it("can stand only after being dealt", () => {
+          expect(() => {
+            gameForStand.roundManager.stand();
+          }).to.throw("need to deal first");
+        });
+
+        it("can stand", () => {
+          gameForStand.roundManager.setBet(100);
+          gameForStand.roundManager.deal();
+
+          gameForStand.roundManager.stand();
+
+          expect(gameForStand.players[0].currentHand().cards.length).to.eql(2);
+        });
+
+        it("when dealer stands, the game ends", () => {
+          // TODO: Game ends
+        });
+      });
 
       describe("split", () => {});
 

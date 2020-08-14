@@ -50,6 +50,24 @@ export default class RoundManager {
     }
   }
 
+  setCurrentActor(actor) {
+    this.currentActor = actor;
+  }
+
+  stand() {
+    if (this.allowableActions.indexOf("stand") < 0) {
+      throw new Error("need to deal first");
+    }
+
+    if (this.currentActor === "player") {
+      this.setCurrentActor("dealer");
+    } else {
+      this.endGame();
+    }
+  }
+
+  endGame() {}
+
   resetAllowableActions() {
     this.allowableActions = [];
   }
