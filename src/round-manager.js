@@ -62,11 +62,24 @@ export default class RoundManager {
     if (this.currentActor === "player") {
       this.setCurrentActor("dealer");
     } else {
-      this.endGame();
+      this.determineWinner();
     }
   }
 
-  endGame() {}
+  determineWinner() {
+    if (this.currentActor !== "dealer") {
+      throw new Error("cannot determine the winner yet");
+    }
+
+    const playerScore = this.parent.players[0].endValue();
+    const dealerScore = this.parent.dealer.currentHand().simpleValue();
+
+    if (playerScore > dealerScore) {
+      this.parent.winner = "player";
+    } else {
+      this.parent.winner = "dealer";
+    }
+  }
 
   resetAllowableActions() {
     this.allowableActions = [];

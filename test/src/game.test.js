@@ -172,6 +172,31 @@ describe("Game", () => {
         });
       });
 
+      describe("determineWinner", () => {
+        const gameForEnd = new Game();
+        gameForEnd.addPlayer({ name: "New Player" });
+
+        it("determine winner only after dealer standing", () => {
+          expect(() => {
+            gameForEnd.roundManager.determineWinner();
+          }).to.throw("cannot determine the winner yet");
+        });
+
+        it("determine the winner", () => {
+          gameForEnd.roundManager.setBet(100);
+          gameForEnd.roundManager.deal();
+
+          // player
+          gameForEnd.roundManager.stand();
+          // dealer
+          gameForEnd.roundManager.stand();
+
+          gameForEnd.roundManager.determineWinner();
+
+          expect(gameForEnd.winner).to.not.eql(null);
+        });
+      });
+
       describe("split", () => {});
 
       describe("double-down", () => {});
