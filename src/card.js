@@ -2,26 +2,26 @@ export default class Card {
   constructor({ suite, name }) {
     this.suite = suite;
     this.name = name;
-    this.values = [];
+    this.value = 0;
     this.setupValue();
   }
 
   setupValue() {
     switch (this.name) {
       case "A":
-        this.values = [1, 11];
+        this.value = 1;
         break;
       case "J":
       case "Q":
       case "K":
-        this.values = [10];
+        this.value = 10;
         break;
       default:
-        this.values = [parseInt(this.name)];
+        this.value = parseInt(this.name);
     }
   }
 
   simpleValue() {
-    return this.values[0];
+    return this.value;
   }
 }

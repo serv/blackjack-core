@@ -21,8 +21,16 @@ export default class Participant {
     return this.hands[this.activeHand];
   }
 
+  setActiveHand(num) {
+    this.activeHand = num;
+  }
+
   resetHand() {
     this.hands = [];
     this.setupHand();
+  }
+
+  endValue() {
+    return Math.max(...this.hands.map((h) => h.simpleValue()));
   }
 }

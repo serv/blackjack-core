@@ -48,13 +48,21 @@ export default class Hand {
   }
 
   simpleValue() {
-    let sum;
+    let sum = 0;
 
     for (let card of this.cards) {
       sum += card.simpleValue();
     }
 
+    if (this.hasAce() && sum + 10 < 21) {
+      sum += 10;
+    }
+
     return sum;
+  }
+
+  hasAce() {
+    return this.cards.filter((card) => card.name === "A").length > 0;
   }
 
   canDoubleDown() {

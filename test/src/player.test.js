@@ -36,18 +36,4 @@ describe("Player", () => {
       expect(player2.hands.length).to.eql(2);
     });
   });
-
-  describe("endValue", () => {
-    it("with one hand", () => {});
-
-    it("with two hands", () => {});
-
-    it("with three hand", () => {});
-
-    it("with four hands", () => {});
-
-    it("with an ace being 1", () => {});
-
-    it("with an ace being 11", () => {});
-  });
 });
