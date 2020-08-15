@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import Game from "../../src/game";
+import Card from "../../src/card";
 
 describe("Game", () => {
   const game = new Game();
@@ -122,7 +123,7 @@ describe("Game", () => {
           expect(gameForDeal.roundManager.allowableActions).to.not.have.members(
             shoultNotHave
           );
-          expect(gameForDeal.roundManager.allowableActions).to.have.members(
+          expect(gameForDeal.roundManager.allowableActions).to.include.members(
             shouldHave
           );
         });
@@ -197,7 +198,50 @@ describe("Game", () => {
         });
       });
 
-      describe("split", () => {});
+      describe("split", () => {
+        const gameSplit = new Game();
+        gameSplit.addPlayer({ name: "New Player" });
+
+        it("without pair, no split", () => {
+          gameSplit.roundManager.setBet(100);
+          gameSplit.roundManager.deal();
+
+          const card1 = new Card({ suite: "hearts", name: "4" });
+          const card2 = new Card({ suite: "spades", name: "5" });
+
+          gameSplit.players[0].resetHand();
+          gameSplit.players[0].take(card1);
+          gameSplit.players[0].take(card2);
+
+          gameSplit.roundManager.resetAllowableActions();
+          gameSplit.roundManager.evalAlloableActions();
+
+          const shouldHave = ["hit", "stand"];
+          expect(gameSplit.roundManager.allowableActions).to.include.members(
+            shouldHave
+          );
+        });
+
+        it("with a pair, has split", () => {
+          gameSplit.roundManager.setBet(100);
+          gameSplit.roundManager.deal();
+
+          const card1 = new Card({ suite: "hearts", name: "4" });
+          const card2 = new Card({ suite: "spades", name: "4" });
+
+          gameSplit.players[0].resetHand();
+          gameSplit.players[0].take(card1);
+          gameSplit.players[0].take(card2);
+
+          gameSplit.roundManager.resetAllowableActions();
+          gameSplit.roundManager.evalAlloableActions();
+
+          const shouldHave = ["hit", "stand"];
+          expect(gameSplit.roundManager.allowableActions).to.include.members(
+            shouldHave
+          );
+        });
+      });
 
       describe("double-down", () => {});
     });
