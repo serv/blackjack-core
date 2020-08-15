@@ -1,5 +1,5 @@
 {
-  "name": "@casinojs/blackjack",
+  "name": "blackjack-core",
   "version": "0.0.1",
   "description": "Blackjack engine",
   "main": "index.js",

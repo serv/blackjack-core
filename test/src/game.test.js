@@ -243,7 +243,50 @@ describe("Game", () => {
         });
       });
 
-      describe("double-down", () => {});
+      describe("double-down", () => {
+        const gameDouble = new Game();
+        gameDouble.addPlayer({ name: "New Player" });
+
+        it("sum with 9 - 11, double down", () => {
+          gameDouble.roundManager.setBet(100);
+          gameDouble.roundManager.deal();
+
+          const card1 = new Card({ suite: "hearts", name: "4" });
+          const card2 = new Card({ suite: "spades", name: "5" });
+
+          gameDouble.players[0].resetHand();
+          gameDouble.players[0].take(card1);
+          gameDouble.players[0].take(card2);
+
+          gameDouble.roundManager.resetAllowableActions();
+          gameDouble.roundManager.evalAlloableActions();
+
+          const shouldHave = ["hit", "stand", "double-down"];
+          expect(gameDouble.roundManager.allowableActions).to.include.members(
+            shouldHave
+          );
+        });
+
+        it("non-9 - 11, no double down", () => {
+          gameDouble.roundManager.setBet(100);
+          gameDouble.roundManager.deal();
+
+          const card1 = new Card({ suite: "hearts", name: "2" });
+          const card2 = new Card({ suite: "spades", name: "3" });
+
+          gameDouble.players[0].resetHand();
+          gameDouble.players[0].take(card1);
+          gameDouble.players[0].take(card2);
+
+          gameDouble.roundManager.resetAllowableActions();
+          gameDouble.roundManager.evalAlloableActions();
+
+          const shouldHave = ["hit", "stand"];
+          expect(gameDouble.roundManager.allowableActions).to.include.members(
+            shouldHave
+          );
+        });
+      });
     });
   });
 });
