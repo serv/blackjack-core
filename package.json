@@ -2,7 +2,8 @@
   "name": "blackjack-core",
   "version": "0.0.1",
   "description": "Blackjack engine",
-  "main": "index.js",
+  "main": "./src/index-main.js",
+  "browser": "./src/index-browser.js",
   "scripts": {
     "test": "mocha --require @babel/register --recursive test"
   },
@@ -15,5 +16,8 @@
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "mocha": "^8.1.1"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
   }
 }
